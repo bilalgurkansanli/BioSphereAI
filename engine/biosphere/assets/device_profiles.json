@@ -1,0 +1,1406 @@
+{
+ "$comment": [
+  "Rear-camera geometry per phone, for biosphere.pano.devices. DATA, NOT CODE: adding",
+  "a phone is one entry here and nothing else.",
+  "",
+  "video_equiv_mm is the 35mm-equivalent focal length of the 1x rear camera ON THE",
+  "DIAGONAL CONVENTION (CIPA, 43.267 mm reference), for the frame the capture app",
+  "actually records -- 1080x1440, which is the sensor's own 4:3 aspect, so no video",
+  "crop applies. If the app ever records 16:9 these numbers need a crop factor of",
+  "about 1.1. focal_px = video_equiv_mm * diagonal_px / 43.267.",
+  "",
+  "sigma_fraction is the honest one-sigma uncertainty, and the solve is bounded at two",
+  "of them: 0.06 where the lens was measured on the device, 0.08 where a manufacturer",
+  "published the figure, 0.12 where it is an estimate.",
+  "",
+  "aliases are exact navigator.userAgentData model strings, lower-cased. On Android",
+  "that is ro.product.model -- the SKU, not the marketing name: a vivo Y22s reports",
+  "V2206 and a Galaxy S23 reports SM-S911B. Apple reports nothing at all, which is",
+  "what ios_fingerprints is for.",
+  "",
+  "Regenerate with scratchpad/merge_devices.py; hand edits are fine too."
+ ],
+ "version": 2,
+ "devices": [
+  {
+   "id": "iphone-11",
+   "brand": "Apple",
+   "model": "iPhone 11",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/2.55",
+   "aliases": [],
+   "sigma_fraction": 0.12,
+   "notes": "Apple-published 26mm equiv (4:3 still). Video figure is my estimate: 4K/1080p is a 16:9 crop plus ~1.05-1.1x stabilisation crop. iOS exposes no model string at all - identify via the viewport table in Part 2.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-11-pro",
+   "brand": "Apple",
+   "model": "iPhone 11 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/2.55",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "No LiDAR - LiDAR starts at iPhone 12 Pro. Shares the 375x812@3 viewport with iPhone X/XS/12 mini/13 mini.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-11-pro-max",
+   "brand": "Apple",
+   "model": "iPhone 11 Pro Max",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/2.55",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Shares 414x896@3 with iPhone XS Max.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-12",
+   "brand": "Apple",
+   "model": "iPhone 12",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/2.55",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Viewport 390x844@3, shared with 12 Pro / 13 / 13 Pro / 14 / 16e - and two of those have LiDAR. Do not infer LiDAR from this fingerprint.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-12-pro",
+   "brand": "Apple",
+   "model": "iPhone 12 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/2.55",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "First iPhone with LiDAR. Same optics as the non-Pro 12; the LiDAR is unreachable from a browser (see browser_facts).",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-12-pro-max",
+   "brand": "Apple",
+   "model": "iPhone 12 Pro Max",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.7",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "First sensor-shift OIS. Larger sensor than the 12 Pro but the same 26mm equiv angle of view.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-12-mini",
+   "brand": "Apple",
+   "model": "iPhone 12 mini",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/2.55",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "f/1.6. Viewport 375x812@3 - indistinguishable from X/XS/11 Pro/13 mini.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-13",
+   "brand": "Apple",
+   "model": "iPhone 13",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.9",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-13-pro",
+   "brand": "Apple",
+   "model": "iPhone 13 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.65",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "f/1.5. Macro mode auto-switches the Camera app to the ultra-wide; the equivalent hazard exists in getUserMedia on Pro models (see browser_facts).",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-13-pro-max",
+   "brand": "Apple",
+   "model": "iPhone 13 Pro Max",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.65",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Viewport 428x926@3, shared with 12 Pro Max and 14 Plus.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-13-mini",
+   "brand": "Apple",
+   "model": "iPhone 13 mini",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.9",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Sensor-shift OIS.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-14",
+   "brand": "Apple",
+   "model": "iPhone 14",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.7",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-14-plus",
+   "brand": "Apple",
+   "model": "iPhone 14 Plus",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.7",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-14-pro",
+   "brand": "Apple",
+   "model": "iPhone 14 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.28",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "IMPORTANT BREAK POINT: the Pro main camera moves from 26mm to 24mm here. 48MP quad-Bayer, default output 12MP (or 24MP from iOS 17). Viewport 393x852@3 - shared with 15, 15 Pro and 16, of which only 15 Pro has LiDAR and only 15 Pro shares the 24mm.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-14-pro-max",
+   "brand": "Apple",
+   "model": "iPhone 14 Pro Max",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.28",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Viewport 430x932@3, shared with 15 Plus / 15 Pro Max / 16 Plus - mixed focal lengths (24 vs 26) inside one fingerprint. This group is the single most dangerous one for a stitcher.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-15",
+   "brand": "Apple",
+   "model": "iPhone 15",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "48MP but 26mm, NOT 24mm - only the Pro models went to 24mm. Getting this backwards is a classic error.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-15-plus",
+   "brand": "Apple",
+   "model": "iPhone 15 Plus",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-15-pro",
+   "brand": "Apple",
+   "model": "iPhone 15 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.28",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "User-selectable default 1x of 24/28/35mm in the Camera app (Settings > Camera > Main Camera). That preference does NOT affect getUserMedia, which delivers the native 24mm sensor stream.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-15-pro-max",
+   "brand": "Apple",
+   "model": "iPhone 15 Pro Max",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.28",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-16",
+   "brand": "Apple",
+   "model": "iPhone 16",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-16-plus",
+   "brand": "Apple",
+   "model": "iPhone 16 Plus",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-16-pro",
+   "brand": "Apple",
+   "model": "iPhone 16 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.28",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Viewport 402x874@3 - VERIFIED, and shared with the iPhone 17 and 17 Pro, which use the same 6.3in 1206x2622 panel. The base 17 in that group has no LiDAR and a 26mm main.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-16-pro-max",
+   "brand": "Apple",
+   "model": "iPhone 16 Pro Max",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.28",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Viewport 440x956@3, shared with iPhone 17 Pro Max.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-16e",
+   "brand": "Apple",
+   "model": "iPhone 16e",
+   "tier": "upper-mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/2.55",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Single rear camera, 48MP f/1.6 on a small 1/2.55in sensor (the same part Apple uses for the 16 Pro ultra-wide), 0.7um pixels. No ultra-wide, no LiDAR. 2x 'telephoto' is a 52mm sensor crop, not a lens. Viewport 390x844@3, colliding with 12/12 Pro/13/13 Pro/14.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-17",
+   "brand": "Apple",
+   "model": "iPhone 17",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "2025. Moved to the 6.3in 1206x2622 panel, so it now shares 402x874@3 with the 16 Pro and 17 Pro. Sensor size is my inference from continuity with the 16, not a confirmed Apple figure - treat as approximate.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-17-pro",
+   "brand": "Apple",
+   "model": "iPhone 17 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.3",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "48MP f/1.78, reported to be Sony IMX903 at 1/1.3in. Camera app offers 1.2x (28mm) and 1.5x (35mm) crop modes; these are app-level crops and do not change what getUserMedia hands you. Viewport 402x874@3 VERIFIED.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-17-pro-max",
+   "brand": "Apple",
+   "model": "iPhone 17 Pro Max",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": true,
+   "sensor": "1/1.3",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "Viewport 440x956@3 (1320x2868 physical), shared with 16 Pro Max.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-air",
+   "brand": "Apple",
+   "model": "iPhone Air",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "2025, single 48MP rear camera. 28mm and 35mm options are digital crops of a 26mm base. Unique viewport: 6.5in 2736x1260 -> 420x912@3. Sensor size is an inference; flag as approximate.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "iphone-se-2022",
+   "brand": "Apple",
+   "model": "iPhone SE (2nd/3rd gen)",
+   "tier": "budget",
+   "video_equiv_mm": 28.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/3.0",
+   "aliases": [],
+   "sigma_fraction": 0.08,
+   "notes": "28mm, NOT 26mm - the SE keeps the old iPhone 8 optical formula. 12MP f/1.8. Viewport 375x667@2, shared with iPhone 6/6s/7/8. Still common as a cheap agency handset.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-10",
+   "brand": "Google",
+   "model": "Pixel 10",
+   "tier": "flagship",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.95",
+   "aliases": [
+    "pixel 10"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "2025. The base Pixel 10 moved to a smaller main sensor than the Pixel 9 to make room for a telephoto; sensor size here is moderate confidence.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-10-pro",
+   "brand": "Google",
+   "model": "Pixel 10 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.31",
+   "aliases": [
+    "pixel 10 pro",
+    "pixel 10 pro xl"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP f/1.7, 1/1.31in, 1.2um, dual-pixel PDAF, OIS - confirmed. Sensor lineage reported variously as GN2 or GNV.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-6",
+   "brand": "Google",
+   "model": "Pixel 6",
+   "tier": "flagship",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.31",
+   "aliases": [
+    "pixel 6"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP GN1 f/1.85. Pixels report clean marketing names in getHighEntropyValues model - by far the easiest brand to profile.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-6a",
+   "brand": "Google",
+   "model": "Pixel 6a",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/2.55",
+   "aliases": [
+    "pixel 6a"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "12.2MP IMX363 f/1.7 - the old Pixel sensor, 26mm not 25mm. The a-series differs optically from the flagship of the same generation.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-7",
+   "brand": "Google",
+   "model": "Pixel 7",
+   "tier": "flagship",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.31",
+   "aliases": [
+    "pixel 7"
+   ],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-7a",
+   "brand": "Google",
+   "model": "Pixel 7a",
+   "tier": "mid",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.73",
+   "aliases": [
+    "pixel 7a"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "64MP IMX787 f/1.89.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-8",
+   "brand": "Google",
+   "model": "Pixel 8",
+   "tier": "flagship",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.31",
+   "aliases": [
+    "pixel 8"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP GN2 f/1.68.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-8a",
+   "brand": "Google",
+   "model": "Pixel 8a",
+   "tier": "mid",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.73",
+   "aliases": [
+    "pixel 8a"
+   ],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-9",
+   "brand": "Google",
+   "model": "Pixel 9",
+   "tier": "flagship",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.31",
+   "aliases": [
+    "pixel 9"
+   ],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "pixel-9-pro",
+   "brand": "Google",
+   "model": "Pixel 9 Pro",
+   "tier": "flagship",
+   "video_equiv_mm": 25.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.31",
+   "aliases": [
+    "pixel 9 pro",
+    "pixel 9 pro xl"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "No LiDAR - no Android phone in this table has LiDAR. Some Androids have ToF sensors, but none of them are reachable from a browser either.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "honor-90",
+   "brand": "Honor",
+   "model": "Honor 90",
+   "tier": "upper-mid",
+   "video_equiv_mm": 24.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/1.4",
+   "aliases": [
+    "rea-nx9"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "200MP HP3 f/1.9, no OIS despite the large sensor. Focal length has moderate confidence.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "honor-x9b",
+   "brand": "Honor",
+   "model": "Honor X9b",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/2.0",
+   "aliases": [
+    "ali-nx1",
+    "ali-n21"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "108MP f/1.75, no OIS. Sold in Turkey as essentially the same hardware as the Magic6 Lite, which reports a different model code."
+  },
+  {
+   "id": "huawei-nova-12s",
+   "brand": "Huawei",
+   "model": "Huawei nova 12s",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/2.0",
+   "aliases": [
+    "foa-lx9",
+    "foa-nx9"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP f/1.8. Huawei devices in TR/EU ship without Google services; many run Huawei Browser (Chromium-based, so userAgentData is present) but some run older AOSP WebView. Test the UA-CH path explicitly on Huawei."
+  },
+  {
+   "id": "oppo-a78",
+   "brand": "Oppo",
+   "model": "Oppo A78 4G",
+   "tier": "budget",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/2.76",
+   "aliases": [
+    "cph2565",
+    "cph2495"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP f/1.8, no OIS, 1080p@30 max. Oppo reports CPH-codes rather than marketing names, so a lookup table is mandatory."
+  },
+  {
+   "id": "oppo-reno-12",
+   "brand": "Oppo",
+   "model": "Oppo Reno12",
+   "tier": "upper-mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.95",
+   "aliases": [
+    "cph2637",
+    "cph2625"
+   ],
+   "sigma_fraction": 0.12,
+   "notes": "50MP LYT-600 f/1.8 with OIS. Focal length estimated.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "realme-12-pro",
+   "brand": "Realme",
+   "model": "Realme 12 Pro 5G",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.95",
+   "aliases": [
+    "rmx3842",
+    "rmx3841"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP IMX882 f/1.8 with OIS."
+  },
+  {
+   "id": "realme-c55",
+   "brand": "Realme",
+   "model": "Realme C55",
+   "tier": "budget",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/2.76",
+   "aliases": [
+    "rmx3710",
+    "rmx3711"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "64MP f/1.8, no OIS, 1080p@30 max."
+  },
+  {
+   "id": "galaxy-a15",
+   "brand": "Samsung",
+   "model": "Galaxy A15",
+   "tier": "budget",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/2.76",
+   "aliases": [
+    "sm-a155f",
+    "sm-a155f/ds",
+    "sm-a155m",
+    "sm-a156b"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP f/1.8, NO OIS, max video 1080p@30. SM-A156B is the 5G variant. A very common budget handset in Turkey; expect handheld motion blur and plan the capture UI around it.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-a34",
+   "brand": "Samsung",
+   "model": "Galaxy A34 5G",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/2.0",
+   "aliases": [
+    "sm-a346b",
+    "sm-a346b/ds",
+    "sm-a346e",
+    "sm-a346m"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "48MP f/1.8 with OIS - unusual and welcome at this price. Max video 4K@30. Very common with Turkish agents.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-a54",
+   "brand": "Samsung",
+   "model": "Galaxy A54 5G",
+   "tier": "upper-mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [
+    "sm-a546b",
+    "sm-a546b/ds",
+    "sm-a546e",
+    "sm-a546u"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP GN1 f/1.8, OIS. One of the highest-volume handsets in the TR/EU agent population.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-a55",
+   "brand": "Samsung",
+   "model": "Galaxy A55 5G",
+   "tier": "upper-mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [
+    "sm-a556b",
+    "sm-a556b/ds",
+    "sm-a556e"
+   ],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-a56",
+   "brand": "Samsung",
+   "model": "Galaxy A56 5G",
+   "tier": "upper-mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [
+    "sm-a566b",
+    "sm-a566b/ds",
+    "sm-a566e"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "2025. Optics essentially carried over from A55.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s21",
+   "brand": "Samsung",
+   "model": "Galaxy S21 5G",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.76",
+   "aliases": [
+    "sm-g991b",
+    "sm-g991b/ds",
+    "sm-g991u",
+    "sm-g991n"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "12MP f/1.8. EU/TR retail SKU is SM-G991B. Android video crop with EIS is typically 1.1-1.2x, hence the wider gap between still and video than on iPhone.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s21-ultra",
+   "brand": "Samsung",
+   "model": "Galaxy S21 Ultra 5G",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.33",
+   "aliases": [
+    "sm-g998b",
+    "sm-g998b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "108MP HM3, default binned output 12MP.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s21-plus",
+   "brand": "Samsung",
+   "model": "Galaxy S21+ 5G",
+   "tier": "flagship",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.76",
+   "aliases": [
+    "sm-g996b",
+    "sm-g996b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s22",
+   "brand": "Samsung",
+   "model": "Galaxy S22 5G",
+   "tier": "flagship",
+   "video_equiv_mm": 23.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [
+    "sm-s901b",
+    "sm-s901b/ds",
+    "sm-s901u"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP GN5, f/1.8. Note the S22 generation is 23mm, wider than the S21's 26mm - a real 3mm swing between adjacent generations.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s22-ultra",
+   "brand": "Samsung",
+   "model": "Galaxy S22 Ultra",
+   "tier": "flagship",
+   "video_equiv_mm": 23.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.33",
+   "aliases": [
+    "sm-s908b",
+    "sm-s908b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "108MP HM3.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s23",
+   "brand": "Samsung",
+   "model": "Galaxy S23",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [
+    "sm-s911b",
+    "sm-s911b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP GN3 f/1.8.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s23-ultra",
+   "brand": "Samsung",
+   "model": "Galaxy S23 Ultra",
+   "tier": "flagship",
+   "video_equiv_mm": 23.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.3",
+   "aliases": [
+    "sm-s918b",
+    "sm-s918b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "200MP HP2, the same main sensor carried through S24 Ultra, S25 Ultra and S26 Ultra.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s24",
+   "brand": "Samsung",
+   "model": "Galaxy S24",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [
+    "sm-s921b",
+    "sm-s921b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s24-ultra",
+   "brand": "Samsung",
+   "model": "Galaxy S24 Ultra",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.3",
+   "aliases": [
+    "sm-s928b",
+    "sm-s928b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "200MP HP2 f/1.7.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s25",
+   "brand": "Samsung",
+   "model": "Galaxy S25",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.56",
+   "aliases": [
+    "sm-s931b",
+    "sm-s931b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s25-ultra",
+   "brand": "Samsung",
+   "model": "Galaxy S25 Ultra",
+   "tier": "flagship",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.3",
+   "aliases": [
+    "sm-s938b",
+    "sm-s938b/ds"
+   ],
+   "sigma_fraction": 0.08,
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "galaxy-s26-ultra",
+   "brand": "Samsung",
+   "model": "Galaxy S26 Ultra",
+   "tier": "flagship",
+   "video_equiv_mm": 23.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.3",
+   "aliases": [
+    "sm-s948b"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "2026. 200MP HP2 (unchanged since S23 Ultra) but the lens opens to f/1.4 and reviews quote 23mm equiv, a change from the S24/S25 Ultra's 24mm. Verify before shipping. The SM-S948B model string is my best inference from Samsung's numbering and is NOT confirmed - log whatever getHighEntropyValues actually returns.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "redmi-note-11",
+   "brand": "Xiaomi",
+   "model": "Redmi Note 11",
+   "tier": "budget",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/2.76",
+   "aliases": [
+    "2201117tg",
+    "2201117ty",
+    "2201117sg"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP f/1.8, no OIS, 1080p@30 max video. The 26mm figure is the commonly quoted value but Xiaomi does not publish an equiv focal length for this model - confidence is moderate, calibrate on a real unit."
+  },
+  {
+   "id": "redmi-note-12",
+   "brand": "Xiaomi",
+   "model": "Redmi Note 12 4G",
+   "tier": "budget",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/2.76",
+   "aliases": [
+    "23021raaeg",
+    "23027rad4g",
+    "22111317g"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP f/1.8, no OIS. Model strings differ per region/SKU more than for any other brand here - treat the list as partial."
+  },
+  {
+   "id": "redmi-note-13",
+   "brand": "Xiaomi",
+   "model": "Redmi Note 13 4G",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/1.67",
+   "aliases": [
+    "23129raa4g",
+    "2312crad3c"
+   ],
+   "sigma_fraction": 0.12,
+   "notes": "108MP HM6 f/1.7, binned to 12MP by default, no OIS. Equivalent focal length is not published by Xiaomi; 26mm is an estimate."
+  },
+  {
+   "id": "redmi-note-13-pro",
+   "brand": "Xiaomi",
+   "model": "Redmi Note 13 Pro 4G",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.67",
+   "aliases": [
+    "2312dra50g",
+    "2312dra50c"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "200MP HP3 f/1.65 WITH OIS - materially better handheld capture than the non-Pro."
+  },
+  {
+   "id": "redmi-note-14",
+   "brand": "Xiaomi",
+   "model": "Redmi Note 14 4G",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/1.95",
+   "aliases": [
+    "24117rk2cg",
+    "2411drn47g"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "LOW CONFIDENCE on both the focal length and the model strings. The Note 14 family fragmented heavily across 4G/5G/Pro/Pro+ SKUs with different sensors. Do not ship a hardcoded profile for this one without measuring a real device."
+  },
+  {
+   "id": "xiaomi-13",
+   "brand": "Xiaomi",
+   "model": "Xiaomi 13",
+   "tier": "flagship",
+   "video_equiv_mm": 23.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.49",
+   "aliases": [
+    "2211133g",
+    "2211133c"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP IMX800 f/1.8, Leica-branded. 23mm is Xiaomi-published.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "xiaomi-14",
+   "brand": "Xiaomi",
+   "model": "Xiaomi 14",
+   "tier": "flagship",
+   "video_equiv_mm": 23.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.31",
+   "aliases": [
+    "23127pn0cg",
+    "23127pn0cc"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP LYT-900 f/1.6.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "xiaomi-15",
+   "brand": "Xiaomi",
+   "model": "Xiaomi 15",
+   "tier": "flagship",
+   "video_equiv_mm": 23.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.31",
+   "aliases": [
+    "24129pn74g",
+    "24129pn74c"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP LYT-900 f/1.62.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "vivo-v29",
+   "brand": "vivo",
+   "model": "vivo V29 5G",
+   "tier": "upper-mid",
+   "video_equiv_mm": 24.0,
+   "ois": true,
+   "lidar": false,
+   "sensor": "1/1.57",
+   "aliases": [
+    "v2250",
+    "v2250a"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "50MP f/1.88 with OIS. Focal length has moderate confidence.",
+   "ultrawide_equiv_mm": 13.0
+  },
+  {
+   "id": "vivo-v40-lite",
+   "brand": "vivo",
+   "model": "vivo V40 Lite",
+   "tier": "mid",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/1.95",
+   "aliases": [
+    "v2354",
+    "v2404"
+   ],
+   "sigma_fraction": 0.08,
+   "notes": "LOW CONFIDENCE on model strings - vivo reuses V-codes across regional SKUs. vivo is heavily represented in the Turkish mid-market, so log real values from the field."
+  },
+  {
+   "id": "vivo-y17s",
+   "brand": "vivo",
+   "model": "vivo Y17s",
+   "tier": "budget",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/3.06",
+   "aliases": [
+    "v2310"
+   ],
+   "sigma_fraction": 0.12,
+   "notes": "50MP f/1.8, no OIS, 1080p@30 max. Focal length estimated."
+  },
+  {
+   "id": "vivo-y22",
+   "brand": "vivo",
+   "model": "vivo Y22",
+   "tier": "budget",
+   "video_equiv_mm": 26.8,
+   "ois": false,
+   "lidar": false,
+   "sensor": "~1/2.76",
+   "aliases": [
+    "v2207"
+   ],
+   "sigma_fraction": 0.06,
+   "notes": "Measured through Camera2: 65.7 deg horizontal on the 4:3 still, which is 26.8 mm on the diagonal convention used here. 50MP f/1.8, no OIS, 1080p max. Assumed optically identical to the Y22s; the focal length is inherited from the Y22s measurement, not independently confirmed."
+  },
+  {
+   "id": "vivo-y22s",
+   "brand": "vivo",
+   "model": "vivo Y22s",
+   "tier": "budget",
+   "video_equiv_mm": 26.8,
+   "ois": false,
+   "lidar": false,
+   "sensor": "~1/2.76 (20.5 mm2 active area)",
+   "aliases": [
+    "v2206"
+   ],
+   "sigma_fraction": 0.06,
+   "notes": "Measured through Camera2: 65.7 deg horizontal on the 4:3 still, which is 26.8 mm on the diagonal convention used here. REFERENCE DEVICE - and the only entry here with hard measured numbers rather than a spec sheet. Camera2 API reports: native focal length 4.0mm, 27.9mm 35mm-equivalent, f/1.8, horizontal FOV 65.7deg, vertical FOV 51.8deg, default output 4080x3060 (12.5MP binned from 50MP), stabilisation NONE, min focus 0.08m, JPEG/DNG. The 27.9mm is horizontal-FOV-based on a 36mm-wide frame: 18/tan(65.7/2) = 27.9, which checks out exactly. Max video is 1080p@30 only. The video estimate assumes 16:9 is a vertical crop preserving horizontal FOV plus a small EIS crop; with no OIS and no listed EIS it may in fact stay at 27.9mm. Measure it. NO OIS means every handheld frame is a motion-blur risk."
+  },
+  {
+   "id": "vivo-y36",
+   "brand": "vivo",
+   "model": "vivo Y36",
+   "tier": "budget",
+   "video_equiv_mm": 26.0,
+   "ois": false,
+   "lidar": false,
+   "sensor": "1/2.76",
+   "aliases": [
+    "v2247",
+    "v2248"
+   ],
+   "sigma_fraction": 0.12,
+   "notes": "50MP f/1.8, no OIS. Focal length estimated, not measured."
+  }
+ ],
+ "ios_fingerprints": [
+  {
+   "css_width": 375,
+   "css_height": 667,
+   "dpr": 2.0,
+   "profile_id": "",
+   "equiv_mm": 26.0,
+   "sigma_fraction": 0.08,
+   "lidar": "no",
+   "models": [
+    "iPhone 6",
+    "iPhone 6s",
+    "iPhone 7",
+    "iPhone 8",
+    "iPhone SE (2nd gen)",
+    "iPhone SE (3rd gen)"
+   ],
+   "note": "Six models share this fingerprint. All are 28mm-equivalent main cameras, so for focal-length purposes the collision is harmless - assume 28mm. That is the one lucky group in this table."
+  },
+  {
+   "css_width": 414,
+   "css_height": 736,
+   "dpr": 3.0,
+   "profile_id": "",
+   "equiv_mm": 26.0,
+   "sigma_fraction": 0.08,
+   "lidar": "no",
+   "models": [
+    "iPhone 6 Plus",
+    "iPhone 6s Plus",
+    "iPhone 7 Plus",
+    "iPhone 8 Plus"
+   ],
+   "note": "All 28mm equivalent. Rare in a 2026 agent population but still occasionally seen."
+  },
+  {
+   "css_width": 375,
+   "css_height": 812,
+   "dpr": 3.0,
+   "profile_id": "iphone-11-pro",
+   "equiv_mm": 26.0,
+   "sigma_fraction": 0.08,
+   "lidar": "no",
+   "models": [
+    "iPhone X",
+    "iPhone XS",
+    "iPhone 11 Pro",
+    "iPhone 12 mini",
+    "iPhone 13 mini"
+   ],
+   "note": "Five models, none with LiDAR, and all 26mm equivalent. Safe to treat as one profile."
+  },
+  {
+   "css_width": 414,
+   "css_height": 896,
+   "dpr": 2.0,
+   "profile_id": "iphone-11",
+   "equiv_mm": 26.0,
+   "sigma_fraction": 0.08,
+   "lidar": "no",
+   "models": [
+    "iPhone XR",
+    "iPhone 11"
+   ],
+   "note": "DPR 2, not 3 - this is what separates the XR/11 from the XS Max/11 Pro Max, which have identical CSS dimensions at DPR 3. Both are 26mm."
+  },
+  {
+   "css_width": 414,
+   "css_height": 896,
+   "dpr": 3.0,
+   "profile_id": "iphone-11-pro-max",
+   "equiv_mm": 26.0,
+   "sigma_fraction": 0.08,
+   "lidar": "no",
+   "models": [
+    "iPhone XS Max",
+    "iPhone 11 Pro Max"
+   ],
+   "note": "Same points as XR/11, distinguished only by devicePixelRatio 3. Both 26mm, no LiDAR."
+  },
+  {
+   "css_width": 390,
+   "css_height": 844,
+   "dpr": 3.0,
+   "profile_id": "iphone-12",
+   "equiv_mm": 26.0,
+   "sigma_fraction": 0.08,
+   "lidar": "maybe",
+   "models": [
+    "iPhone 12",
+    "iPhone 12 Pro",
+    "iPhone 13",
+    "iPhone 13 Pro",
+    "iPhone 14",
+    "iPhone 16e"
+   ],
+   "note": "MIXED LiDAR GROUP - 12 Pro and 13 Pro DO have LiDAR, the other four do not, and nothing in the browser can tell them apart. lidar is marked false because you must not assume it. Focal length is a uniform 26mm across all six, so stitching is safe; only depth claims are not. The 16e joining this group in 2025 is easy to miss."
+  },
+  {
+   "css_width": 428,
+   "css_height": 926,
+   "dpr": 3.0,
+   "profile_id": "iphone-12-pro-max",
+   "equiv_mm": 26.0,
+   "sigma_fraction": 0.08,
+   "lidar": "maybe",
+   "models": [
+    "iPhone 12 Pro Max",
+    "iPhone 13 Pro Max",
+    "iPhone 14 Plus"
+   ],
+   "note": "MIXED LiDAR - the two Pro Max models have it, the 14 Plus does not. All three are 26mm, so the focal length is safe."
+  },
+  {
+   "css_width": 393,
+   "css_height": 852,
+   "dpr": 3.0,
+   "profile_id": "iphone-14-pro",
+   "equiv_mm": 25.0,
+   "sigma_fraction": 0.08,
+   "lidar": "maybe",
+   "models": [
+    "iPhone 14 Pro",
+    "iPhone 15",
+    "iPhone 15 Pro",
+    "iPhone 16"
+   ],
+   "note": "THE DANGEROUS ONE. Mixed LiDAR (14 Pro and 15 Pro yes; 15 and 16 no) AND mixed focal length: 14 Pro and 15 Pro are 24mm, the 15 and 16 are 26mm. There is no browser-visible signal that separates them. Do not guess - calibrate the focal length from the imagery itself, or ask the user which phone they have."
+  },
+  {
+   "css_width": 430,
+   "css_height": 932,
+   "dpr": 3.0,
+   "profile_id": "iphone-14-pro-max",
+   "equiv_mm": 25.0,
+   "sigma_fraction": 0.08,
+   "lidar": "maybe",
+   "models": [
+    "iPhone 14 Pro Max",
+    "iPhone 15 Plus",
+    "iPhone 15 Pro Max",
+    "iPhone 16 Plus"
+   ],
+   "note": "Same hazard as the 393x852 group: mixed LiDAR and a mixed 24mm/26mm split inside one indistinguishable fingerprint."
+  },
+  {
+   "css_width": 402,
+   "css_height": 874,
+   "dpr": 3.0,
+   "profile_id": "iphone-16-pro",
+   "equiv_mm": 25.0,
+   "sigma_fraction": 0.08,
+   "lidar": "maybe",
+   "models": [
+    "iPhone 16 Pro",
+    "iPhone 17",
+    "iPhone 17 Pro"
+   ],
+   "note": "VERIFIED 402x874 at DPR 3 (1206x2622 physical) for 16 Pro and 17 Pro. The base iPhone 17 adopted the same 6.3in panel in 2025, so it collides here too - and it has no LiDAR and a 26mm main against the Pros' 24mm. This group was clean in 2024 and became mixed in 2025; if you built a lookup before then, it is now wrong."
+  },
+  {
+   "css_width": 440,
+   "css_height": 956,
+   "dpr": 3.0,
+   "profile_id": "iphone-16-pro-max",
+   "equiv_mm": 24.0,
+   "sigma_fraction": 0.08,
+   "lidar": "yes",
+   "models": [
+    "iPhone 16 Pro Max",
+    "iPhone 17 Pro Max"
+   ],
+   "note": "1320x2868 physical. Both models have LiDAR and both are 24mm, so this is one of the few groups where you can safely assume both."
+  },
+  {
+   "css_width": 420,
+   "css_height": 912,
+   "dpr": 3.0,
+   "profile_id": "iphone-air",
+   "equiv_mm": 26.0,
+   "sigma_fraction": 0.08,
+   "lidar": "no",
+   "models": [
+    "iPhone Air"
+   ],
+   "note": "6.5in 2736x1260 panel, unique to this model in 2025-2026 - the only unambiguous modern iPhone fingerprint. Single 26mm rear camera, no LiDAR. Derived by dividing the published physical resolution by 3; worth confirming on a real handset."
+  }
+ ]
+}

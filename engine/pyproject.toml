@@ -1,0 +1,140 @@
+[project]
+name = "biosphere-engine"
+version = "0.1.0"
+description = "BioSphere AI — phone video to 360° virtual tour: stitching engine and API"
+license = { text = "MIT" }
+authors = [{ name = "Bilal Gürkan Şanlı" }]
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "python-multipart>=0.0.12",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.6.0",
+    "sqlmodel>=0.0.22",
+    "opencv-contrib-python>=4.10.0",
+    "numpy>=1.26,<3",
+    "scipy>=1.14.0",
+    "pillow>=11.0.0",
+    "scikit-image>=0.24.0",
+    "httpx>=0.28.0",
+    "structlog>=24.4.0",
+    "python-dotenv>=1.0.1",
+    "orjson>=3.10.0",
+    "tqdm>=4.67.0",
+    "typer>=0.15.0",
+    "rich>=13.9.0",
+]
+
+[project.optional-dependencies]
+gpu = [
+    "torch>=2.5.0",
+    "torchvision>=0.20.0",
+]
+# Room emptying (`/api/v1/ai/empty-room`). Optional: without it the endpoint falls back to
+# the colour segmentation and the classical filler, and reports `model_backed: false`.
+#
+# LICENCES, BECAUSE THEY ARE NOT ALL THE SAME AND THIS PRODUCT SHIPS CLOSED:
+#   transformers            Apache-2.0        fine
+#   Mask2Former (code)      MIT               fine
+#   ADE20K (training data)  research-only     the weights were trained on a dataset MIT
+#                                             CSAIL licenses for non-commercial use; using
+#                                             them commercially needs their permission
+#   LaMa (code + big-lama    Apache-2.0       CORRECTED. This table previously said the
+#   weights)                                  weights were CC BY-NC-SA 4.0 and therefore
+#                                             non-commercial, and that claim cost the project
+#                                             its best-supported option for a whole round of
+#                                             work. Checked at source: advimman/lama's LICENSE
+#                                             is Apache-2.0, "Copyright [2021] Samsung
+#                                             Research", with no non-commercial clause, and the
+#                                             weight mirrors carry the same tag.
+#                                             Provenance of redistributed weights is still a
+#                                             lawyer's question before shipping, but it is a
+#                                             different question from the one this note asked.
+#   diffusers (code)        Apache-2.0        fine
+#   SD 2 inpainting         OpenRAIL++-M      commercial use PERMITTED, with the use
+#                                             restrictions attached to that licence
+#   SD 1.5 inpainting       CreativeML        same shape, older text
+#                           OpenRAIL-M
+#
+# The diffusion weights are the freer half of that list, so making them the default window
+# filler improves the licence position of the shipped feature rather than complicating it:
+# big-lama is left holding only the canvas cleanup pass, and `ai_inpainter = "sd"` drops it
+# entirely. See `biosphere.ai.sd_inpaint` for why each model gets the pass it gets.
+#
+# Nothing here is downloaded at runtime unless BIOSPHERE_AI_ALLOW_DOWNLOADS says so --
+# weights are found on disk or the feature degrades to the classical filler.
+ai = [
+    "transformers>=4.44",
+    "diffusers>=0.31",
+    "accelerate>=1.0",
+    "safetensors>=0.4",
+]
+# The model that writes a listing's headline and description (`POST /properties/{id}/listing`).
+#
+# ITS OWN EXTRA, AND NOT PART OF `ai`, because it is a different kind of dependency from
+# everything in that list: not weights this project puts on a disk, but a client for somebody
+# else's service, billed per call and reached over the network. A deployment that wants the
+# room emptier has no reason to install it, and one that wants this has no reason to pull
+# four gigabytes of diffusers.
+#
+# Without it — or without a key — `POST /properties/{id}/listing` still answers, off the
+# deterministic composer, with `model_backed: false`. See `biosphere.ai.listing`.
+listing = [
+    "anthropic>=1.0",
+]
+# The 3D walkthrough (`biosphere/splat`). Brush (the trainer) and splat-transform (the SOG
+# writer) are not Python and live in the tools dir; Depth Anything 3 (the dense start,
+# `splat/densify.py`) is used from a source checkout for the reason below and is optional.
+#
+# THE OPENCV TRAP. `lightglue` (and DA3's own package) depend on plain `opencv-python`, which
+# installs over `opencv-contrib-python` and silently takes away the contrib modules the
+# panorama engine needs (AKAZE, the seam finders). It happened twice on the dev laptop. The
+# override below keeps uv from ever installing it; with plain pip, install lightglue with
+# `--no-deps` and check `python -c "import cv2; print(hasattr(cv2, 'xfeatures2d'))"`.
+#
+# LICENCES: pycolmap BSD-3, LightGlue + ALIKED weights Apache-2.0, kornia Apache-2.0,
+# DA3-BASE/SMALL code and weights Apache-2.0 (the larger DA3 any-view models are CC BY-NC and
+# are refused by densify.py), addict MIT, omegaconf BSD-3, einops MIT.
+walkthrough = [
+    "pycolmap>=4.2",
+    "lightglue @ git+https://github.com/cvg/LightGlue.git@eb42fee2d71449efb0aa5c10549752b5d75384d8",
+    "kornia>=0.8",
+    "addict>=2.4",
+    "omegaconf>=2.3",
+    "einops>=0.8",
+]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.8.0",
+]
+
+[project.scripts]
+biosphere = "biosphere.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["biosphere"]
+
+[tool.uv]
+# See the walkthrough extra: never let a dependency swap opencv-contrib-python for opencv-python.
+override-dependencies = ["opencv-python ; sys_platform == 'never'"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501", "B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "slow: full-resolution end-to-end runs; minutes, not seconds",
+]

@@ -1,0 +1,405 @@
+@import "tailwindcss";
+
+/* =====================================================================================
+   BioSphere AI — design system
+   -------------------------------------------------------------------------------------
+   Dark-first. The product is a viewer for photographic content, so the interface has to
+   recede: near-black grounds, one saturated accent, and light used sparingly as a signal
+   rather than decoration. A light theme is defined for completeness and activates via
+   `data-theme="light"` on <html>; the player and the public embed always force dark.
+   ===================================================================================== */
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-canvas-raised: var(--canvas-raised);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-bio: var(--bio);
+  --color-bio-soft: var(--bio-soft);
+  --color-bio-dim: var(--bio-dim);
+  --color-sky: var(--sky);
+  --color-violet: var(--violet);
+  --color-amber: var(--amber);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-lift: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 12px 40px -12px rgb(0 0 0 / 0.7);
+  --shadow-glow: 0 0 0 1px var(--bio-dim), 0 0 28px -6px var(--bio-dim);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:root {
+  --canvas: #05070a;
+  --canvas-raised: #080b10;
+  --surface: #0b0f15;
+  --surface-2: #11161e;
+  --surface-3: #171d27;
+  --line: rgb(255 255 255 / 0.07);
+  --line-strong: rgb(255 255 255 / 0.14);
+
+  --ink: #e9eef4;
+  --ink-muted: #94a2b3;
+  --ink-faint: #5d6a7a;
+
+  --bio: #17e2c5;
+  --bio-soft: #7ff5e2;
+  --bio-dim: rgb(23 226 197 / 0.28);
+  --sky: #3b9eff;
+  --violet: #9b7cff;
+  --amber: #ffb44c;
+  --danger: #ff6b6b;
+  --success: #3ddc97;
+
+  --grain-opacity: 0.035;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --canvas: #f6f8fa;
+  --canvas-raised: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f1f4f8;
+  --surface-3: #e6ebf2;
+  --line: rgb(10 20 35 / 0.09);
+  --line-strong: rgb(10 20 35 / 0.16);
+
+  --ink: #0d141c;
+  --ink-muted: #55636f;
+  --ink-faint: #8b98a5;
+
+  --bio: #04a98f;
+  --bio-soft: #0fcbad;
+  --bio-dim: rgb(4 169 143 / 0.22);
+  --sky: #1f7ae0;
+  --violet: #7c5cf0;
+  --amber: #c47a10;
+  --danger: #d64545;
+  --success: #17a06a;
+
+  --grain-opacity: 0;
+  color-scheme: light;
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+  }
+
+  /* A faint film grain keeps large flat dark areas from banding on cheap panels. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* The grain exists to stop large flat dark areas banding. A live camera preview has no
+   * flat areas and no banding, so over the capture the layer buys nothing — while a
+   * full-viewport tiled bitmap at z-index 9999 sits between the compositor and the video
+   * for the whole recording. `display: none` rather than `opacity: 0`, because a
+   * transparent fixed layer is still a layer the compositor has to carry. */
+  body[data-live-camera]::before {
+    display: none;
+  }
+
+  ::selection {
+    background: var(--bio-dim);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--bio);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-3);
+    border-radius: 99px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--line-strong);
+    background-clip: content-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Frosted panel used for every card, modal and toolbar. */
+  .glass {
+    background: color-mix(in oklab, var(--surface) 72%, transparent);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border: 1px solid var(--line);
+  }
+
+  .glass-strong {
+    background: color-mix(in oklab, var(--surface-2) 88%, transparent);
+    backdrop-filter: blur(28px) saturate(1.5);
+    -webkit-backdrop-filter: blur(28px) saturate(1.5);
+    border: 1px solid var(--line-strong);
+  }
+
+  /*
+   * OVER A LIVE CAMERA, A FROSTED PANEL IS NOT A DECORATION — IT IS A FRAME RATE.
+   *
+   * `backdrop-filter` asks the compositor to read back everything painted beneath the
+   * element, blur it, and composite the result — every frame. On Android that also pulls
+   * the `<video>` off the hardware overlay path, because a surface the compositor has to
+   * SAMPLE cannot stay on a plane the compositor only ever hands to the display. So the
+   * camera preview stops being a zero-cost overlay and becomes a texture that is uploaded,
+   * read back and blurred sixty times a second, on the same GPU that is simultaneously
+   * decoding the camera stream and running a hardware H.264 encode.
+   *
+   * On the guided capture that is not one panel but four — the row prompt, which is on
+   * screen for the entire capture, the pause button, the warning toast and the sheet — plus
+   * the full-viewport grain layer below.
+   *
+   * The panels are 72% and 88% opaque to begin with, so what the blur contributes over a
+   * moving camera image is very close to nothing. Painting them flat and slightly more
+   * opaque is at least as legible against a busy room, and it costs zero.
+   *
+   * Scoped to the live capture rather than removed: on the dashboard, the marketing page
+   * and the review screen there is no video underneath, the backdrop is static, and the
+   * compositor caches the blur. Those pages keep the frosted look they were designed with.
+   */
+  [data-live-camera] .glass,
+  [data-live-camera] .glass-strong {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* `.glass-strong` keeps its own 88% ground: the blur was contributing at most twelve
+   * points of it, and under the stage's top scrim rather less. `.glass` starts at 72%,
+   * where the blur genuinely was doing the legibility work, so dropping the filter without
+   * raising the ground would trade frames for readable text over a sunlit wall. Both stay
+   * translucent — the camera must still show through the chrome. */
+  [data-live-camera] .glass {
+    background: color-mix(in oklab, var(--surface) 90%, transparent);
+  }
+
+  /* The signature accent gradient. Used for primary CTAs and active states only. */
+  .bio-gradient {
+    background-image: linear-gradient(115deg, var(--bio) 0%, var(--sky) 52%, var(--violet) 100%);
+  }
+
+  .bio-text {
+    background-image: linear-gradient(115deg, var(--bio-soft) 0%, var(--sky) 60%, var(--violet) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Ambient blueprint grid behind hero and empty states.
+
+     The grid and its fade live on a pseudo-element, NOT on the container. `mask-image`
+     masks an element's entire rendered subtree, not just its background — so masking the
+     container faded out every child as well. The fade is a radial gradient centred at the
+     TOP (`at 50% 0%`), which made the effect invisible wherever content sat near the top
+     of the hero and catastrophic wherever it did not: on the capture page the card is
+     vertically centred, landed in the fully transparent part of the mask, and rendered as
+     a ghost — the heading faintly legible, the form fields not visible at all.
+
+     Keeping the mask on `::before` gives the same look with none of that: only the grid
+     is faded, and content is never touched. */
+  .grid-bg {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .grid-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 20%, transparent 78%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 20%, transparent 78%);
+  }
+
+  .ring-glow {
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+@layer utilities {
+  .animate-shimmer {
+    background-size: 200% 100%;
+    animation: shimmer 1.8s linear infinite;
+  }
+
+  .animate-breathe {
+    animation: breathe 3.6s var(--ease-out-expo) infinite;
+  }
+
+  /* An entrance effect must never be what makes content visible.
+
+     This was a keyframe animation with `fill-mode: both`, so the element sat at the
+     `from` state — opacity 0 — until the animation clock advanced. Measured on the
+     capture page: `animationName: rise`, `playState: "running"`, and `currentTime` stuck
+     at 0 for 1.75 s while the computed opacity stayed 0; calling `.finish()` by hand
+     immediately produced opacity 1. Any condition that stalls the animation clock — an
+     occluded or backgrounded tab, a throttled phone, a compositor under load — therefore
+     leaves the entire card invisible with no way for the user to recover it.
+
+     Note that moving to a transition is not on its own enough: a transition out of
+     `@starting-style` still *begins* at the start state, so a frozen clock parks it there
+     exactly as the keyframe did. Verified — the first attempt at this fix still measured
+     opacity 0. The property that actually matters is that **the start state is visible**.
+     So opacity is not animated at all any more; only the 10 px slide is. A stalled clock
+     now costs a slide nobody will miss, instead of the entire card.
+
+     It also fixes a second hazard the keyframe version had: a running CSS animation
+     outranks an inline style, so `transform: none` in the `to` frame silently flattened
+     the inline transform of anything positioned by script. That cost a real bug in the
+     player's hotspot cards, where the auto-flip stopped firing and right-edge labels ran
+     off screen. A transition only touches the properties listed here. */
+  .animate-rise {
+    opacity: 1;
+    transform: none;
+    transition: transform 0.45s var(--ease-out-expo);
+  }
+
+  @starting-style {
+    .animate-rise {
+      transform: translateY(10px);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin 14s linear infinite;
+  }
+
+  /* Suppresses the blue tap flash on the player's touch controls. */
+  .no-tap {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+    user-select: none;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The capture stage's own height.
+ *
+ * `position: fixed; inset: 0` sizes to iOS Safari's LARGE viewport — the one with the
+ * toolbar hidden — so while the toolbar is showing, the bottom of the stage sits behind it.
+ * The recording clock, the speed meter and the finish button end up crowded into whatever is
+ * left, which is what "the menus were on top of each other" was describing.
+ *
+ * `dvh` is the dynamic viewport: it shrinks and grows with the toolbar, so the stage is
+ * always exactly the visible area. The `vh` line before it is the fallback for engines
+ * without `dvh`; declaration order is what picks the winner, which is why this is a rule
+ * here rather than two utility classes whose emitted order is not guaranteed.
+ */
+.stage-viewport {
+  height: 100vh;
+  height: 100dvh;
+}

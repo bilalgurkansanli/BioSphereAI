@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Node / Next
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.env*.local
+# The engine's own local override; `.env.example` is the tracked template.
+.env
+
+# Media & generated artefacts (these live under BIOSPHERE_MEDIA_ROOT, but never commit strays)
+data/
+*.mp4
+*.mov
+!engine/tests/fixtures/**
+web/public/dev/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Quality-gate and diagnostic output. Excluded for two reasons, and the first is the
+# important one: `real*/`, `walk*/` and `experiment/` hold thousands of JPEG frames
+# extracted from real captures of a home, plus the panoramas built from them. `*.mp4`
+# above stops the source videos, but not the frames. The second reason is size — a single
+# run leaves a few thousand files behind.
+#
+# Nothing is lost by excluding them: the acceptance gate builds its own procedural room and
+# regenerates every artefact from scratch with
+#     pytest tests/test_pipeline_quality.py
+.quality-report/
+engine/gate/
+engine/scripts/gate/
+scripts/certs/*.pem
+
+# Brush (wgpu) writes its autotune cache next to the engine; a machine-specific artefact.
+engine/target/
+
+# Machine-local: the LAN certificate (generate your own, see scripts/lan-proxy.mjs) and its
+# backups, and Claude Code's per-machine preview launcher with absolute paths.
+scripts/certs/*.bak
+.claude/launch.json
+.claude/settings.local.json

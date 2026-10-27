@@ -1,0 +1,18 @@
+name: Idea / Öneri
+description: Suggest an improvement. / Bir iyileştirme önerin.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve? / Hangi sorunu çözüyor?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal / Öneri
+  - type: textarea
+    id: measure
+    attributes:
+      label: How would we know it is better? / Daha iyi olduğunu nasıl ölçeriz?

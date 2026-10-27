@@ -1,0 +1,25 @@
+[req]
+distinguished_name = dn
+x509_extensions = v3
+prompt = no
+[dn]
+CN = BioSphere AI local
+[v3]
+subjectAltName = @alt
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+[alt]
+# Every machine that serves the capture over the LAN needs its own address in here: the
+# certificate is checked against the address the phone typed, and a mismatch is a warning
+# Android will let you past and iOS will not, however well the certificate is trusted.
+#
+# Add this machine's LAN address (ipconfig / ip addr) as IP.2, then generate the pair that
+# scripts/lan-proxy.mjs reads (both files are gitignored; each machine makes its own):
+#
+#   openssl req -x509 -newkey rsa:2048 -nodes -days 825 -keyout scripts/certs/key.pem -out scripts/certs/cert.pem -config scripts/certs/san.cnf -extensions v3
+#
+# (Git for Windows ships openssl. In Git Bash prefix the command with MSYS_NO_PATHCONV=1.)
+IP.1 = 127.0.0.1
+# IP.2 = 192.168.1.10
+DNS.1 = localhost

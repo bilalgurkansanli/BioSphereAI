@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security issue / Güvenlik açığı
+    url: https://github.com/bilalgurkansanli/BioSphereAI/security/advisories/new
+    about: Report vulnerabilities privately. / Açıkları gizli olarak bildirin.

@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    name: Web — types and unit tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx vitest run
+
+  engine:
+    name: Engine — fast tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: engine
+    steps:
+      - uses: actions/checkout@v4
+      - name: System packages
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg libgl1
+      - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the engine
+        run: |
+          uv venv .venv --python 3.12
+          uv pip install --python .venv/bin/python -e ".[dev]"
+      # A deliberately CPU-only, model-free subset: the whole suite needs GPU models and
+      # several minutes of stitching that a hosted runner does not have.
+      - name: Tests
+        env:
+          BIOSPHERE_MEDIA_ROOT: ${{ runner.temp }}/biosphere-data
+          BIOSPHERE_ENABLE_GPU: "false"
+        run: >
+          .venv/bin/python -m pytest -m "not slow" -q
+          tests/test_geometry.py tests/test_devices.py tests/test_mesh.py tests/test_seams.py
+          tests/test_invest_calc.py tests/test_invest_audit.py
+          tests/test_auth.py tests/test_capture_grant.py tests/test_db_migration.py

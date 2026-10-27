@@ -1,0 +1,41 @@
+name: Bug report / Hata bildirimi
+description: Something does not work as described. / Bir şey anlatıldığı gibi çalışmıyor.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not attach captures of real homes or people. Use a synthetic room
+        (`python -m biosphere.synth.cli make-capture ...`) if you need to share a reproduction.
+        Gerçek ev ya da kişi görüntüsü eklemeyin; gerekiyorsa sentetik bir oda kullanın.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area / Alan
+      options:
+        - 360 capture & stitching / 360 çekim ve dikiş
+        - 360 player / oynatıcı
+        - Floor plan & measurement / kat planı ve ölçüm
+        - 3D walkthrough / 3B gezinti
+        - VR
+        - Furniture removal & staging / mobilya kaldırma ve dekor
+        - Listing copy & investment assistant / ilan metni ve yatırım asistanı
+        - Setup & dashboard / kurulum ve panel
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect? / Ne oldu, ne bekliyordunuz?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce / Adımlar
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment / Ortam
+      description: OS, GPU, Python and Node versions, and the output of `GET /api/v1/health`.
+      render: text
