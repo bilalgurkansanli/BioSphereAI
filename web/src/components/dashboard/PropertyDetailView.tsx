@@ -84,7 +84,7 @@ function SceneTile({
           />
         ) : (
           <div className="grid size-full place-items-center">
-            <LogoMark className="size-8 text-ink-faint/40" />
+            <LogoMark className="size-8 opacity-25 grayscale" />
           </div>
         )}
         <div className="absolute top-2.5 left-2.5 flex gap-1.5">

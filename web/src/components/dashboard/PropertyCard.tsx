@@ -72,7 +72,7 @@ export function PropertyCard({ property, onEmbed, onRename, onDelete }: Property
               aria-hidden
             />
             <div className="absolute inset-0 grid place-items-center">
-              <LogoMark className="size-9 text-ink/25" />
+              <LogoMark className="size-9 opacity-25 grayscale" />
             </div>
             <span className="sr-only">{ui("properties.noCover", locale)}</span>
           </div>

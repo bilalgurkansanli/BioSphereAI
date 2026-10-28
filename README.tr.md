@@ -1,4 +1,6 @@
-# BioSphere AI
+<p align="center"><img src="web/public/brand/logo-mark.png" alt="BioSphere logo" width="112"></p>
+
+<h1 align="center">BioSphere AI</h1>
 
 **Telefonla çekilen videodan 360° sanal tur — açık kaynak.**
 

@@ -32,7 +32,6 @@ export const metadata: Metadata = {
     title: "BioSphere AI — telefon videosundan 360° sanal tur",
     description: "Açık kaynak (MIT): telefon videosundan 8K'ya kadar 360° panorama, oynatıcı ve kat planı.",
   },
-  icons: { icon: "/favicon.ico" },
 };
 
 export const viewport: Viewport = {
